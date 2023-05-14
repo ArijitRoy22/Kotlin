@@ -26,6 +26,7 @@ public class Knapsack1 {
 
     static double knapSack(int w, int[] wt, int[] pt, int n) {
         int[] index = new int[n];
+        double[] count = new double[n];
         double[] ratio = new double[n];
         for (int i = 0; i < n; i++) {
             index[i] = i;
@@ -39,16 +40,18 @@ public class Knapsack1 {
             int currentIndex = index[i];
             if (wt[currentIndex] <= w) {
                 w = w - wt[currentIndex];
+                count[currentIndex] = 1; 
                 Tpt = Tpt + pt[currentIndex];
             }
             else
             {
                 double frac = (double) w / (double) wt[currentIndex];
-                
+                count[currentIndex] = frac;
                 Tpt = Tpt + (pt[currentIndex] * frac);
                 break;
             }
         }
+        System.out.println(Arrays.toString(count));
         return Tpt;
     }
     
